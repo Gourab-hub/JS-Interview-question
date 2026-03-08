@@ -349,6 +349,7 @@ console.log(sum(1, 2, 3));
 console.log(sum(4, 5, 6, 7));
 ```
 16. What is Shallow Copy?
+
 A Shallow Copy creates a new object, but nested objects still reference the original object.
 So if you change a nested value, it affects the original object.
 
@@ -362,9 +363,10 @@ const user = {
 
 const copyUser = { ...user };
 copyUser.address.city = "Delhi";
-console.log(user.address.city);
+console.log(user.address.city);//Delhi
 ```
 17. What is Deep Copy?
+
 A Deep Copy creates a completely independent copy, including all nested objects.
 
 Changes in the copied object do not affect the original object.
@@ -378,7 +380,7 @@ const user = {
 
 const deepCopy = JSON.parse(JSON.stringify(user));
 deepCopy.address.city = "Delhi";
-console.log(user.address.city);
+console.log(user.address.city);//Kolkata
 ```
 18. Difference Between Shallow Copy and Deep Copy
 ```sql
@@ -388,4 +390,122 @@ console.log(user.address.city);
 | Reference   | Nested objects share reference | No shared reference            |
 | Performance | Faster                         | Slower                         |
 | Example     | `Object.assign()` / Spread     | `JSON.parse(JSON.stringify())` |
+```
+19. Function vs Method
+
+A. Function
+
+A function is a block of code designed to perform a specific task.
+It is independent and not attached to any object.
+```javascript
+function greet() {
+  console.log("Hello");
+}
+greet();//Hello
+```
+B. Method
+
+A method is a function that is inside an object and works with that object’s properties.
+```javascript
+const user = {
+  name: "Gourab",
+  greet: function () {
+    console.log("Hello " + this.name);
+  }
+};
+user.greet();//Hello Gourab
+```
+
+20. call vs apply vs bind
+
+call, apply, and bind are used to control the value of this inside a function.
+They allow you to borrow methods from another object.
+A. call()
+
+call() invokes the function immediately and passes arguments one by one.
+
+```javascript
+const person = {
+  name: "Gourab"
+};
+
+function greet(city) {
+  console.log("Hello " + this.name + " from " + city);
+}
+
+greet.call(person, "Kolkata");//Hello Gourab from Kolkata
+```
+B. apply()
+
+apply() is similar to call(), but arguments are passed as an array.
+```javascript
+const person = {
+  name: "Gourab"
+};
+
+function greet(city, country) {
+  console.log("Hello " + this.name + " from " + city + ", " + country);
+}
+
+greet.apply(person, ["Kolkata", "India"]);//Hello Gourab from Kolkata, India
+```
+C. bind()
+
+bind() does not call the function immediately.
+It returns a new function with this bound to the provided object.
+```javascript
+const person = {
+  name: "Gourab"
+};
+
+function greet(city) {
+  console.log("Hello " + this.name + " from " + city);
+}
+
+const newFunc = greet.bind(person);
+
+newFunc("Kolkata");//Hello Gourab from Kolkata
+```
+```sql
+| Feature   | call()              | apply()            | bind()               |
+| --------- | ------------------- | ------------------ | -------------------- |
+| Execution | Immediate           | Immediate          | Returns new function |
+| Arguments | Passed individually | Passed as array    | Passed later         |
+| Return    | Result of function  | Result of function | New function         |
+
+```
+Simple Interview Answer
+  call() → invokes function immediately with arguments passed individually
+  apply() → invokes function immediately with arguments as an array
+  bind() → returns a new function with this bound, executed later
+
+21. Normal Function vs Arrow Function
+```sql
+| Feature          | Normal Function        | Arrow Function            |
+| ---------------- | ---------------------- | ------------------------- |
+| Syntax           | `function` keyword     | `=>` arrow syntax         |
+| `this` keyword   | Has its own `this`     | Uses parent `this`        |
+| Arguments object | Available              | Not available             |
+| Constructor      | Can be used with `new` | Cannot be used with `new` |
+| Syntax length    | Longer                 | Shorter                   |
+
+```
+```javascript
+const user = {
+  name: "Gourab",
+
+  normalFunc: function () {
+    console.log(this.name);
+  },
+
+  arrowFunc: () => {
+    console.log(this.name);
+  }
+};
+
+user.normalFunc(); //Gourab
+user.arrowFunc(); //undefined
+
+Normal function gets this from the object.
+Arrow function gets this from the outer scope.
 ```

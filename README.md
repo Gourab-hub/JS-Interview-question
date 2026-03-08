@@ -89,3 +89,43 @@ getUsers();
 | Introduced     | ES6                      | ES8                 |
 
 ```
+
+6. What is the Event Loop in JavaScript?
+
+The Event Loop is a mechanism that allows JavaScript to handle asynchronous operations while running on a single-threaded environment.
+
+It continuously checks the call stack and task queue.
+If the call stack is empty, the event loop moves tasks from the queue to the stack for execution.
+
+
+Key Components
+
+A.Call Stack
+  Executes JavaScript functions.
+  Works in Last In First Out (LIFO) order.
+B. Web APIs / Browser APIs
+  Handles async tasks like:
+    setTimeout
+    fetch
+    DOM events
+C.Callback Queue (Task Queue)
+  Stores callbacks from async operations.
+D.Event Loop
+  Moves callbacks from the queue to the call stack when the stack is empty.
+```javascript
+console.log("1");
+
+setTimeout(() => {
+  console.log("2");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("3");
+});
+
+console.log("4");
+1 → sync
+4 → sync
+3 → Promise (microtask queue)
+2 → setTimeout (macrotask queue)
+```

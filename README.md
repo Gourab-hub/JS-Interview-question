@@ -78,11 +78,14 @@ async function getUsers() {
 
 getUsers();
 ```
+5. Difference Between Promise and Async/Await
 ```sql
-| Feature        | Promise           | Async/Await              |
-| -------------- | ----------------- | ------------------------ |
-| Syntax         | `.then().catch()` | `async / await`          |
-| Readability    | More complex      | Cleaner                  |
-| Error Handling | `.catch()`        | `try/catch`              |
-| Usage          | Base concept      | Built on top of Promises |
+| Feature        | Promise                  | Async/Await         |
+| -------------- | ------------------------ | ------------------- |
+| Syntax         | `.then()` and `.catch()` | `async` and `await` |
+| Readability    | More complex             | Cleaner and easier  |
+| Error Handling | `.catch()`               | `try...catch`       |
+| Code Structure | Callback style           | Looks synchronous   |
+| Introduced     | ES6                      | ES8                 |
+
 ```

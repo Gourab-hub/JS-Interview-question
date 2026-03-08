@@ -509,3 +509,193 @@ user.arrowFunc(); //undefined
 Normal function gets this from the object.
 Arrow function gets this from the outer scope.
 ```
+22. Arrow Function: Constructor and Hoisting
+
+A. Are Arrow Functions Constructible?
+
+No.
+Arrow functions cannot be used as constructors, so you cannot use new with them.
+
+```javascript
+const Person = (name) => {
+  this.name = name;
+};
+
+const p = new Person("Gourab");//TypeError: Person is not a constructor
+Arrow functions cannot be used as constructors because they do not have their own this.
+```
+
+B. Are Arrow Functions Hoisted?
+
+No.
+Arrow functions are not hoisted like function declarations.
+```javascript
+greet();
+
+const greet = () => {
+  console.log("Hello");
+};
+//ReferenceError: Cannot access 'greet' before initialization
+Arrow functions are not hoisted like function declarations because they are stored in variables.
+
+23. What is Hoisting?
+Hoisting is JavaScript's behavior of moving variable and function declarations to the top of their scope during the compilation phase.
+
+This means you can sometimes use variables or functions before they are declared in the code.
+
+```javascript
+console.log(a);
+
+let a = 10; //ReferenceError: Cannot access 'a' before initialization
+This happens because let is hoisted but placed in the Temporal Dead Zone (TDZ).
+```
+24. Temporal Dead Zone (TDZ)
+
+The Temporal Dead Zone (TDZ) is the time between when a variable is hoisted and when it is initialized.
+During this period, the variable cannot be accessed, and trying to access it will throw an error.
+This happens with let and const.
+
+25. Promise.all()
+
+Promise.all() runs multiple promises in parallel and returns the result only if all promises are resolved.
+If any one promise fails, the entire promise rejects immediately.
+
+```javascript
+const p1 = Promise.resolve("A");
+const p2 = Promise.resolve("B");
+const p3 = Promise.reject("Error");
+
+Promise.all([p1, p2, p3])
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
+//Error
+```
+
+26. Promise.allSettled()
+Promise.allSettled() waits for all promises to complete, whether they are resolved or rejected.
+It returns the result of each promise with its status.
+```javascript
+const p1 = Promise.resolve("A");
+const p2 = Promise.resolve("B");
+const p3 = Promise.reject("Error");
+
+Promise.allSettled([p1, p2, p3])
+  .then((res) => console.log(res));
+/*[
+ { status: "fulfilled", value: "A" },
+ { status: "fulfilled", value: "B" },
+ { status: "rejected", reason: "Error" }
+]*/
+```
+27. Promise.race()
+Promise.race() returns a promise that settles as soon as the first promise settles from the list of promises.
+  If the first settled promise resolves → result resolves
+  If the first settled promise rejects → result rejects
+  It does not wait for the remaining promises.
+
+```javascript
+const p1 = new Promise((resolve) => {
+  setTimeout(() => resolve("Promise 1"), 2000);
+});
+const p2 = new Promise((resolve) => {
+  setTimeout(() => resolve("Promise 2"), 1000);
+});
+Promise.race([p1, p2]).then((result) => {
+  console.log(result);
+});
+//Promise 2
+```
+
+28. Primitive vs Non-Primitive Data Types
+Primitive types store actual values directly in memory.
+They are immutable (cannot be changed).
+Types of Primitive Data
+  String
+  Number
+  Boolean
+  Null
+  Undefined
+  Symbol
+  BigInt
+
+30. Non-Primitive Data Types
+Non-primitive types store references (memory addresses) instead of actual values.
+These are mutable (can be changed).
+Types
+  Object
+  Array
+  Function
+```javascript
+let obj1 = { name: "Gourab" };
+let obj2 = obj1;
+
+obj2.name = "Rahul";
+
+console.log(obj1.name); //Rahul
+```
+
+31. Anonymous Function
+
+An anonymous function is a function without a name.
+It is usually assigned to a variable or used as a callback function.
+
+```javascript
+const greet = function () {
+  console.log("Hello");
+};
+
+greet(); //Hello
+```
+32. Self Invoking Function (IIFE)
+A Self Invoking Function (also called Immediately Invoked Function Expression – IIFE) is a function that runs immediately after it is defined.
+
+```javascript
+(function (name) {
+  console.log("Hello " + name);
+})("Gourab"); // Hello Gourab
+```
+
+```sql
+| Feature   | Anonymous Function             | Self Invoking Function |
+| --------- | ------------------------------ | ---------------------- |
+| Name      | No name                        | Usually anonymous      |
+| Execution | Called manually                | Runs immediately       |
+| Usage     | Callbacks, variable assignment | Initialization code    |
+| Syntax    | `const fn = function(){}`      | `(function(){})()`     |
+```
+33. What is Function Currying?
+Function Currying is a technique where a function takes one argument at a time and returns another function until all arguments are received.
+
+```javascript
+function add(a) {
+  return function (b) {
+    return function (c) {
+      return a + b + c;
+    };
+  };
+}
+const add = a => b => c => a + b + c;
+console.log(add(2)(3)(4)); //9
+```
+Why Currying is Used
+  Function reuse
+  Partial application
+  Cleaner functional programming
+
+34. What is a Callback Function?
+A callback function is a function that is passed as an argument to another function and is executed after the main function completes.
+
+In simple words, one function calls another function later.
+
+```javascript
+function greet(name, callback) {
+  console.log("Hello " + name);
+  callback();
+}
+function sayBye() {
+  console.log("Goodbye!");
+}
+greet("Gourab", sayBye);
+//Hello Gourab
+//Goodbye!
+```

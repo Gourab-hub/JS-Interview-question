@@ -129,3 +129,45 @@ console.log("4");
 3 → Promise (microtask queue)
 2 → setTimeout (macrotask queue)
 ```
+
+7. What is Prototype in JavaScript?
+
+In JavaScript, every object has a hidden property called prototype.
+It allows objects to inherit properties and methods from another object.
+
+This concept is called Prototypal Inheritance.
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHello = function () {
+  console.log("Hello " + this.name);
+};
+const user1 = new Person("Gourab");
+const user2 = new Person("Rahul");
+user1.sayHello();
+user2.sayHello();
+Hello Gourab
+Hello Rahul
+```
+
+Why Prototype is Used
+  Memory efficient (methods shared between objects)
+  Supports inheritance
+  Helps create object-based relationships
+  
+8. What is Memoization?
+Memoization is an optimization technique where the result of a function call is stored (cached) so that when the same input occurs again, the function returns the cached result instead of recalculating it.
+This improves performance, especially for expensive computations.
+
+
+```javascript
+function square(n) {
+  console.log("Calculating...");
+  return n * n;
+}
+
+console.log(square(5));
+console.log(square(5));
+```

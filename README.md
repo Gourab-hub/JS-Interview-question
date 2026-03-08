@@ -336,3 +336,15 @@ const greet = function () {
 | Update    | Yes      | Yes       | No        |
 | Hoisting  | Yes      | Yes (TDZ) | Yes (TDZ) |
 ```
+15.What is the Rest Operator?
+
+The Rest Operator (...) allows a function to collect multiple arguments into a single array.
+It is mainly used when the number of arguments passed to a function is unknown.
+
+```javascript
+function sum(...numbers) {
+  return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3));
+console.log(sum(4, 5, 6, 7));
+```

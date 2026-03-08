@@ -647,6 +647,7 @@ const greet = function () {
 greet(); //Hello
 ```
 32. Self Invoking Function (IIFE)
+
 A Self Invoking Function (also called Immediately Invoked Function Expression â€“ IIFE) is a function that runs immediately after it is defined.
 
 ```javascript
@@ -664,6 +665,7 @@ A Self Invoking Function (also called Immediately Invoked Function Expression â€
 | Syntax    | `const fn = function(){}`      | `(function(){})()`     |
 ```
 33. What is Function Currying?
+
 Function Currying is a technique where a function takes one argument at a time and returns another function until all arguments are received.
 
 ```javascript
@@ -683,6 +685,7 @@ Why Currying is Used
   Cleaner functional programming
 
 34. What is a Callback Function?
+
 A callback function is a function that is passed as an argument to another function and is executed after the main function completes.
 
 In simple words, one function calls another function later.
@@ -698,4 +701,37 @@ function sayBye() {
 greet("Gourab", sayBye);
 //Hello Gourab
 //Goodbye!
+```
+35. Different Types of Errors in JavaScript
+
+A. Syntax Error
+
+A Syntax Error occurs when the code violates JavaScript syntax rules.
+```javascript
+let a = ;
+console.log(a); //SyntaxError: Unexpected token
+```
+
+B. Reference Error
+
+A Reference Error occurs when you use a variable that has not been declared.
+```javascript
+console.log(x); //ReferenceError: x is not defined
+```
+C. Type Error
+
+A Type Error occurs when a value is used in an invalid way.
+```javascript
+let num = 10;
+
+num.toUpperCase(); //TypeError: num.toUpperCase is not a function
+```
+36. Can We Redeclare a let Variable in JavaScript?
+No.
+A variable declared with let cannot be redeclared in the same scope.
+```javascript
+let a = 10;
+let a = 20;
+
+console.log(a); // SyntaxError: Identifier 'a' has already been declared
 ```

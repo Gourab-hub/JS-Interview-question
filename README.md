@@ -171,3 +171,168 @@ function square(n) {
 console.log(square(5));
 console.log(square(5));
 ```
+9. What is Event Bubbling?
+
+Event Bubbling is a mechanism where an event starts from the target element and then propagates upward to its parent elements in the DOM tree.
+In simple terms, the event moves from child → parent → grandparent → document.
+
+```html
+<div id="parent">
+  <button id="child">Click Me</button>
+</div>
+```
+
+### JavaScript
+
+```javascript
+document.getElementById("parent").addEventListener("click", () => {
+  console.log("Parent clicked");
+});
+
+document.getElementById("child").addEventListener("click", () => {
+  console.log("Button clicked");
+});
+```
+
+### When you click the button
+
+### Output
+```
+Button clicked
+Parent clicked
+```
+10.Call Stack vs Event Loop
+
+Call Stack:
+The call stack executes synchronous JavaScript code and function calls.
+
+```javascript
+function first() {
+  second();
+}
+function second() {
+  console.log("Hello");
+}
+first();
+```
+Event Loop:
+The event loop moves asynchronous callbacks from the queue to the call stack when the stack becomes
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+console.log("End");
+```
+```sql
+| Feature   | Call Stack         | Event Loop               |
+| --------- | ------------------ | ------------------------ |
+| Purpose   | Executes functions | Handles async tasks      |
+| Type      | Data structure     | Mechanism                |
+| Execution | Synchronous        | Asynchronous             |
+| Role      | Runs code          | Moves callbacks to stack |
+
+```
+11. Promise vs Promise Chaining
+
+A. What is a Promise?
+
+A Promise is used to handle asynchronous operations in JavaScript.
+It represents a value that may be available now, later, or never.
+A promise has three states:
+  Pending
+  Resolved (Fulfilled)
+  Rejected
+
+
+```javascript
+function getData() {
+  return new Promise((resolve, reject) => {
+    resolve("Data received");
+  });
+}
+
+getData()
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
+B. What is Promise Chaining?
+
+Promise Chaining means using multiple .then() methods in sequence to perform multiple asynchronous operations one after another.
+```javascript
+Promise.resolve(2)
+  .then((num) => {
+    console.log(num);
+    return num * 2;
+  })
+  .then((num) => {
+    console.log(num);
+    return num * 2;
+  })
+  .then((num) => {
+    console.log(num);
+  });
+```
+```sql
+| Feature   | Promise                     | Promise Chaining                               |
+| --------- | --------------------------- | ---------------------------------------------- |
+| Meaning   | Handles one async operation | Handles multiple async operations sequentially |
+| Syntax    | `.then()`                   | Multiple `.then()`                             |
+| Usage     | Single task                 | Series of dependent tasks                      |
+| Data Flow | One result                  | Result passed to next `.then()`                |
+
+```
+12. What is a Function Expression?
+
+A Function Expression is a function that is assigned to a variable.
+Unlike function declarations, function expressions are not hoisted, so they cannot be used before they are defined.
+
+```javascript
+const greet = function() {
+  console.log("Hello");
+};
+greet();//Hello
+```
+13. Function Declaration vs Function Expression
+```javascript
+greet();
+
+function greet() {
+  console.log("Hello");
+}
+//Hello
+```
+```javascript
+greet();
+
+const greet = function () {
+  console.log("Hello");
+};
+//ReferenceError: Cannot access 'greet' before initialization
+```
+```sql
+| Feature                | Function Declaration              | Function Expression           |
+| ---------------------- | --------------------------------- | ----------------------------- |
+| Definition             | Declared using `function` keyword | Function assigned to variable |
+| Hoisting               | Yes                               | No                            |
+| Call before definition | Possible                          | Not possible                  |
+| Use case               | General functions                 | Callbacks, closures           |
+
+```
+14. var vs let vs const
+
+```sql
+| Feature   | var      | let       | const     |
+| --------- | -------- | --------- | --------- |
+| Scope     | Function | Block     | Block     |
+| Redeclare | Yes      | No        | No        |
+| Update    | Yes      | Yes       | No        |
+| Hoisting  | Yes      | Yes (TDZ) | Yes (TDZ) |
+```

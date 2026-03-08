@@ -348,3 +348,44 @@ function sum(...numbers) {
 console.log(sum(1, 2, 3));
 console.log(sum(4, 5, 6, 7));
 ```
+16. What is Shallow Copy?
+A Shallow Copy creates a new object, but nested objects still reference the original object.
+So if you change a nested value, it affects the original object.
+
+```javascript
+const user = {
+  name: "Gourab",
+  address: {
+    city: "Kolkata"
+  }
+};
+
+const copyUser = { ...user };
+copyUser.address.city = "Delhi";
+console.log(user.address.city);
+```
+17. What is Deep Copy?
+A Deep Copy creates a completely independent copy, including all nested objects.
+
+Changes in the copied object do not affect the original object.
+```javascript
+const user = {
+  name: "Gourab",
+  address: {
+    city: "Kolkata"
+  }
+};
+
+const deepCopy = JSON.parse(JSON.stringify(user));
+deepCopy.address.city = "Delhi";
+console.log(user.address.city);
+```
+18. Difference Between Shallow Copy and Deep Copy
+```sql
+| Feature     | Shallow Copy                   | Deep Copy                      |
+| ----------- | ------------------------------ | ------------------------------ |
+| Copy Level  | First level only               | All nested levels              |
+| Reference   | Nested objects share reference | No shared reference            |
+| Performance | Faster                         | Slower                         |
+| Example     | `Object.assign()` / Spread     | `JSON.parse(JSON.stringify())` |
+```
